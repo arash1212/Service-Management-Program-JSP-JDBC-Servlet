@@ -17,9 +17,11 @@ public class RemoveUserFromService extends HttpServlet {
         try {
             Users users = new Users().setId(Long.parseLong(request.getParameter("user_id")));
             Service service = new Service().setId(Long.parseLong(request.getParameter("service_id")));
-            System.out.println(users.getId() + " " + service.getId());
+            //
             ServiceVasetService.getInstance().deleteUserFromService(users, service);
+            //
             response.sendRedirect("/admin/service/findOne.do?id=" + service.getId());
+            //
         } catch (Exception e) {
             e.printStackTrace();
         }

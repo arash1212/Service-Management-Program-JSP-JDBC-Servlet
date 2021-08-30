@@ -42,15 +42,15 @@ public class UserRoleService {
         }
     }
 
-    public List<User_role> getAllByName(User_role user_role) throws SQLException {
+    public List<User_role> getAllByName(String roleName) throws SQLException {
         try (UserRoleRepository userRoleRepository = new UserRoleRepository()) {
-            return userRoleRepository.findAllByName(user_role);
+            return userRoleRepository.findAllByName(roleName);
         }
     }
 
-    public User_role getOneById(User_role user_role) throws SQLException {
+    public User_role getOneById(Long id) throws SQLException {
         try (UserRoleRepository userRoleRepository = new UserRoleRepository()) {
-            return userRoleRepository.findRoleById(user_role);
+            return userRoleRepository.findRoleById(id);
         }
     }
 

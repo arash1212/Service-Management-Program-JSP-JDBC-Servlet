@@ -17,9 +17,13 @@ public class Login extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
+            //
             Users users = UsersService.getInstance().findUserByUsername(new Users().setUsername(request.getParameter("username")));
+            //
             if (users != null && users.getPassword().equals(request.getParameter("password"))) {
-                User_role user_Role = UserRoleService.getInstance().getOneById(new User_role().setId(users.getRole_id()));
+                //
+                User_role user_Role = UserRoleService.getInstance().getOneById(users.getRole_id());
+                //
                 if (user_Role != null) {
                     request.getSession().setAttribute("roleName", user_Role.getRole_name());
                     response.sendRedirect("/");
@@ -28,6 +32,7 @@ public class Login extends HttpServlet {
                     response.sendRedirect("/login.jsp");
                     throw new Exception("user role not found");
                 }
+                //
             } else {
                 response.sendRedirect("/login.jsp");
                 throw new Exception("user not found / wrong password");

@@ -11,12 +11,15 @@
 <head>
     <title>ورود به سایت</title>
 </head>
-<body>
+<body dir="rtl">
 
 <jsp:include page="templates/headerTemplate.jsp"/>
 
 <fieldset>
-    <legend>ثبت نام</legend>
+    <legend>ورود</legend>
+
+    <be /><br />
+
     <form action="/public/login.do">
         <label> نام کاربری <br/>
             <input type="text" name="username" required/> <br /><br />
@@ -24,7 +27,7 @@
         <label> رمز عبور : <br/>
             <input type="password" name="password" required/> <br /><br />
         </label>
-        <input type="submit" value="ثبت نام">
+        <input type="submit" value="ورود">
     </form>
 </fieldset>
 

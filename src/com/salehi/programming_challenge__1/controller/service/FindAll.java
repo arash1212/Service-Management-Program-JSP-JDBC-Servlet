@@ -24,12 +24,10 @@ public class FindAll extends HttpServlet {
         try {
 
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-            for (Service s : ServicesService.getInstance().getAll()) {
-                System.out.println(s.getStartDate());
-                System.out.println(formatter.parse(s.getStartDate()));
-            }
+            //
             request.setAttribute("servicesList", ServicesService.getInstance().getAll());
             request.getRequestDispatcher("/admin/Services.jsp").forward(request, response);
+            //
         } catch (Exception e) {
             e.printStackTrace();
         }

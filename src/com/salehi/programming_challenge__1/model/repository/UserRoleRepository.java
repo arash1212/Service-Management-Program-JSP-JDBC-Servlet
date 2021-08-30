@@ -51,23 +51,27 @@ public class UserRoleRepository implements AutoCloseable {
         //
         ResultSet resultSet = preparedStatement.executeQuery();
         //
-        if(resultSet.next()) {
+        if (resultSet.next()) {
+            //
             return new User_role().setId(resultSet.getLong("id"))
                     .setRole_name(resultSet.getString("role_name"))
                     .setAddress(resultSet.getString("address"));
-        }else return null;
+            //
+        } else return null;
     }
 
-    public List<User_role> findAllByName(User_role user_role) throws SQLException {
+    public List<User_role> findAllByName(String roleName) throws SQLException {
         preparedStatement = connection.prepareStatement("select * from USER_ROLE where ROLE_NAME =?");
-        preparedStatement.setString(1, user_role.getRole_name());
+        preparedStatement.setString(1, roleName);
         //
         ResultSet resultSet = preparedStatement.executeQuery();
         //
         List<User_role> userRoles = new ArrayList<>();
+        User_role user_role;
+        //
         while (resultSet.next()) {
             //
-            user_role.setId(resultSet.getLong("id"))
+            user_role = new User_role().setId(resultSet.getLong("id"))
                     .setRole_name(resultSet.getString("role_name"))
                     .setAddress(resultSet.getString("address"));
             //
@@ -76,16 +80,17 @@ public class UserRoleRepository implements AutoCloseable {
         return userRoles;
     }
 
-    public User_role findRoleById(User_role user_role) throws SQLException {
+    public User_role findRoleById(Long id) throws SQLException {
         preparedStatement = connection.prepareStatement("select * from USER_ROLE where ID=?");
-        preparedStatement.setLong(1, user_role.getId());
+        preparedStatement.setLong(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         //
+        User_role user_role;
         if (resultSet.next()) {
-            return user_role.setId(resultSet.getLong("id"))
+            return user_role = new User_role().setId(resultSet.getLong("id"))
                     .setRole_name(resultSet.getString("role_name"))
                     .setAddress(resultSet.getString("address"));
-        }else return null;
+        } else return null;
     }
 
     public List<User_role> getAll() throws SQLException {

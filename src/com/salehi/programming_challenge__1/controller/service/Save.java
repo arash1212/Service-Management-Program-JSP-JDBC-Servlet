@@ -28,9 +28,10 @@ public class Save extends HttpServlet {
                     .setActive(Short.parseShort(request.getParameter("active")));
             //
 
-            System.out.println(service.getActive());
             if (!service.getStartDate().equals(service.getEndDate()) && dateFormat.parse(service.getStartDate()).before(dateFormat.parse(service.getEndDate()))) {
+                //
                 ServicesService.getInstance().save(service);
+                //
             } else
                 throw new Exception("service's startDate and endDate should not be the same,and startDate should be before endDate");
             //
