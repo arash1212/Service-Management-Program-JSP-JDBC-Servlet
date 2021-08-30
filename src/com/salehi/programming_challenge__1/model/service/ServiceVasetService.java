@@ -1,6 +1,7 @@
 package com.salehi.programming_challenge__1.model.service;
 
 import com.salehi.programming_challenge__1.model.entity.Service;
+import com.salehi.programming_challenge__1.model.entity.Service_vaset;
 import com.salehi.programming_challenge__1.model.entity.Users;
 import com.salehi.programming_challenge__1.model.repository.ServiceVasetRepository;
 
@@ -20,6 +21,18 @@ public class ServiceVasetService {
     public void save(Users users, Service service) throws SQLException {
         try (ServiceVasetRepository serviceVasetRepository = new ServiceVasetRepository()) {
             serviceVasetRepository.save(users, service);
+        }
+    }
+
+    public void deleteUserFromService(Users users, Service service) throws SQLException {
+        try (ServiceVasetRepository serviceVasetRepository = new ServiceVasetRepository()) {
+            serviceVasetRepository.removeUserFromService(users, service);
+        }
+    }
+
+    public Service_vaset getOne(Service_vaset serviceVaset) throws SQLException {
+        try (ServiceVasetRepository serviceVasetRepository = new ServiceVasetRepository()) {
+            return serviceVasetRepository.findOne(serviceVaset);
         }
     }
 }

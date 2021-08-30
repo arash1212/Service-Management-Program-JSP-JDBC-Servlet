@@ -40,13 +40,13 @@ public class UsersRepository implements AutoCloseable {
         preparedStatement.setString(1, users.getUsername());
         ResultSet resultSet = preparedStatement.executeQuery();
         //
-        resultSet.next();
-        //
-        return new Users().setId(resultSet.getLong("id"))
-                .setUsername(resultSet.getString("username"))
-                .setPassword(resultSet.getString("password"))
-                .setCredit(resultSet.getLong("credit"))
-                .setRole_id(resultSet.getLong("role_id"));
+        if (resultSet.next()) {
+            return new Users().setId(resultSet.getLong("id"))
+                    .setUsername(resultSet.getString("username"))
+                    .setPassword(resultSet.getString("password"))
+                    .setCredit(resultSet.getLong("credit"))
+                    .setRole_id(resultSet.getLong("role_id"));
+        } else return null;
     }
 
 

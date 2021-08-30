@@ -1,6 +1,7 @@
 package com.salehi.programming_challenge__1.model.service;
 
 import com.salehi.programming_challenge__1.model.entity.Service;
+import com.salehi.programming_challenge__1.model.entity.Users;
 import com.salehi.programming_challenge__1.model.repository.ServiceRepository;
 
 import java.sql.SQLException;
@@ -40,4 +41,11 @@ public class ServicesService {
             return serviceRepository.findAll();
         }
     }
+
+    public List<Users> getAllServiceUsers(Service service) throws SQLException {
+        try (ServiceRepository serviceRepository = new ServiceRepository()) {
+            return serviceRepository.findServiceUsers(service);
+        }
+    }
+
 }

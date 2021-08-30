@@ -51,10 +51,11 @@ public class UserRoleRepository implements AutoCloseable {
         //
         ResultSet resultSet = preparedStatement.executeQuery();
         //
-        resultSet.next();
-        return new User_role().setId(resultSet.getLong("id"))
-                .setRole_name(resultSet.getString("role_name"))
-                .setAddress(resultSet.getString("address"));
+        if(resultSet.next()) {
+            return new User_role().setId(resultSet.getLong("id"))
+                    .setRole_name(resultSet.getString("role_name"))
+                    .setAddress(resultSet.getString("address"));
+        }else return null;
     }
 
     public List<User_role> findAllByName(User_role user_role) throws SQLException {
@@ -80,11 +81,11 @@ public class UserRoleRepository implements AutoCloseable {
         preparedStatement.setLong(1, user_role.getId());
         ResultSet resultSet = preparedStatement.executeQuery();
         //
-        resultSet.next();
-        //
-        return user_role.setId(resultSet.getLong("id"))
-                .setRole_name(resultSet.getString("role_name"))
-                .setAddress(resultSet.getString("address"));
+        if (resultSet.next()) {
+            return user_role.setId(resultSet.getLong("id"))
+                    .setRole_name(resultSet.getString("role_name"))
+                    .setAddress(resultSet.getString("address"));
+        }else return null;
     }
 
     public List<User_role> getAll() throws SQLException {

@@ -2,6 +2,7 @@ package com.salehi.programming_challenge__1.model.repository;
 
 import com.salehi.programming_challenge__1.model.common.JDBCConnection;
 import com.salehi.programming_challenge__1.model.entity.Service;
+import com.salehi.programming_challenge__1.model.entity.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -84,6 +85,26 @@ public class ServiceRepository implements AutoCloseable {
 
         return services;
     }
+
+    public List<Users> findServiceUsers(Service service) throws SQLException {
+        preparedStatement = connection.prepareStatement("select * from SERVICE_VASET vaset inner join USERS users on vaset.USER_ID = users.ID and vaset.SERVICE_ID=?");
+        preparedStatement.setLong(1, service.getId());
+        //
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<Users> usersList = new ArrayList<>();
+        Users users;
+        while (resultSet.next()) {
+            users = new Users().setId(resultSet.getLong("id"))
+                    .setUsername(resultSet.getString("username"))
+                    .setCredit(resultSet.getLong("credit"))
+                    .setRole_id(resultSet.getLong("role_id"));
+
+            usersList.add(users);
+        }
+        return usersList;
+    }
+
 
     @Override
     public void close() throws SQLException {

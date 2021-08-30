@@ -19,6 +19,8 @@ public class FindOne extends HttpServlet {
             //
             if (service != null) {
                 request.setAttribute("service", service);
+                request.setAttribute("serviceUsersList", ServicesService.getInstance().getAllServiceUsers(service));
+                //
                 request.getRequestDispatcher("/admin/ServiceDetails.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/admin/service/findAll.do").forward(request, response);
