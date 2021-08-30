@@ -23,9 +23,10 @@ public class Update extends HttpServlet {
                     .setPeak(Integer.parseInt(request.getParameter("peak")))
                     .setStartDate(String.valueOf(request.getParameter("startTime")))
                     .setEndDate(String.valueOf(request.getParameter("endTime")))
-                    .setActive(Boolean.parseBoolean(request.getParameter("active")));
+                    .setActive(request.getParameter("active") == null ? 0 : Short.parseShort(request.getParameter("active")));
             //
-            System.out.println(service.getStartDate());
+
+            System.out.println(service.getActive());
             if (!service.getStartDate().equals(service.getEndDate()) && dateFormat.parse(service.getStartDate()).before(dateFormat.parse(service.getEndDate()))) {
                 ServicesService.getInstance().update(service);
                 response.sendRedirect("/admin/service/findOne.do?id=" + service.getId());

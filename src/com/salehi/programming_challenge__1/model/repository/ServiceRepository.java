@@ -32,7 +32,7 @@ public class ServiceRepository implements AutoCloseable {
         preparedStatement.setInt(4, service.getPeak());
         preparedStatement.setString(5, service.getStartDate());
         preparedStatement.setString(6, service.getEndDate());
-        preparedStatement.setBoolean(7, service.isActive());
+        preparedStatement.setShort(7, service.getActive());
         preparedStatement.executeUpdate();
     }
 
@@ -43,7 +43,7 @@ public class ServiceRepository implements AutoCloseable {
         preparedStatement.setInt(3, service.getPeak());
         preparedStatement.setString(4, service.getStartDate());
         preparedStatement.setString(5, service.getEndDate());
-        preparedStatement.setBoolean(6, service.isActive());
+        preparedStatement.setShort(6, service.getActive());
         preparedStatement.setLong(7, service.getId());
         preparedStatement.executeUpdate();
     }
@@ -58,7 +58,7 @@ public class ServiceRepository implements AutoCloseable {
                     .setPeak(resultSet.getInt("peak"))
                     .setPrice(resultSet.getLong("price"))
                     .setName(resultSet.getString("name"))
-                    .setActive(resultSet.getBoolean("active"))
+                    .setActive(resultSet.getShort("active"))
                     .setStartDate(resultSet.getString("startDate"))
                     .setEndDate(resultSet.getString("endDate"));
         } else return null;
@@ -78,7 +78,7 @@ public class ServiceRepository implements AutoCloseable {
                     .setPeak(resultSet.getInt("peak"))
                     .setStartDate(resultSet.getString("startDate"))
                     .setEndDate(resultSet.getString("endDate"))
-                    .setActive(resultSet.getBoolean("active"));
+                    .setActive(resultSet.getShort("active"));
 
             services.add(service);
         }

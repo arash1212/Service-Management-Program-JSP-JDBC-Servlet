@@ -10,7 +10,7 @@ public class Service {
     private int peak;
     private String startDate;
     private String endDate;
-    private boolean active;
+    private short active;
 
     public Long getId() {
         return id;
@@ -66,12 +66,14 @@ public class Service {
         return this;
     }
 
-    public boolean isActive() {
+    public short getActive() {
         return active;
     }
 
-    public Service setActive(boolean active) {
-        this.active = active;
-        return this;
+    public Service setActive(short active) {
+        if (active == 1 || active == 0) {
+            this.active = active;
+            return this;
+        }else throw new IllegalArgumentException("variable active only accepts 0 or 1");
     }
 }

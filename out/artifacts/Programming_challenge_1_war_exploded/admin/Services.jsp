@@ -19,7 +19,7 @@
 <fieldset>
     <legend>لیست تمام سرویس ها</legend>
     <be /><br />
-    <table border="1" style="margin: auto;">
+    <table border="1" style="margin: auto">
         <tr>
             <th>شماره سرویس</th>
             <th>نام سرویس</th>
