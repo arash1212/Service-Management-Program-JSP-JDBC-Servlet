@@ -15,32 +15,36 @@
 <jsp:include page="/templates/headerTemplate.jsp"/>
 <div>
 
+    <div class="container">
+        <fieldset>
+            <legend class="w-auto">افزودن کاربر به سرویس</legend>
 
-    <fieldset>
-        <legend>افزودن کاربر به سرویس</legend>
+            <table border="1" class="table" style="margin: auto">
+                <tr>
+                    <th>شماره سرویس</th>
+                    <th>آی دی کاربر مورد نظر</th>
+                    <th>نام کاربری مورد نظر</th>
+                    <th>افزودن کاربر به سرویس</th>
+                </tr>
 
-        <table border="1" class="table" style="margin: auto">
-            <tr>
-                <th>شماره سرویس</th>
-                <th>آی دی کاربر مورد نظر</th>
-                <th>نام کاربری مورد نظر</th>
-                <th>افزودن کاربر به سرویس</th>
-            </tr>
+                <tr>
+                    <form action="/admin/serviceVaset/save.do">
+                        <td><input type="text" name="service_id" value="${param.id}" required readonly/></td>
+                        <td><input type="text" name="user_id" required/></td>
+                        <td><input type="text" name="username" required/></td>
+                        <td><input type="submit" value="افزودن کاربر" class="btn btn-dark"></td>
+                    </form>
+                </tr>
 
-            <tr>
-                <form action="/admin/serviceVaset/save.do">
-                    <td><input type="text" name="service_id" value="${param.id}" required readonly/></td>
-                    <td><input type="text" name="user_id" required/></td>
-                    <td><input type="text" name="username" required/></td>
-                    <td><input type="submit" value="افزودن کاربر" class="btn btn-dark"></td>
-                </form>
-            </tr>
+            </table>
 
-        </table>
+        </fieldset>
 
-    </fieldset>
+    </div>
 
 
+    <br/><br/>
+    <hr />
     <br/><br/>
 
     <fieldset>
@@ -86,36 +90,43 @@
             </tr>
         </table>
     </fieldset>
+
+    <br/><br/>
+    <hr />
     <br/><br/>
 
-    <fieldset>
-        <legend>لیست اعضا</legend>
+    <div class="container">
+        <fieldset>
+            <legend>لیست اعضا</legend>
 
-        <h4>تعداد اعضا سرویس : <c:out value="${requestScope.servicesList.size()}"/></h4>
+            <h4>تعداد اعضا سرویس : <c:out value="${requestScope.servicesList.size()}"/></h4>
 
-        <table class="table" border="1">
-            <tr>
-                <th>آی دی</th>
-                <th>نام کاربری</th>
-                <th>اعتبار</th>
-                <th>ای دی نقش</th>
-                <th>حذف کاربر از سرویس</th>
-            </tr>
-            <c:forEach var="user" items="${requestScope.serviceUsersList}">
+            <table class="table" border="1">
                 <tr>
-                    <form action="/admin/serviceVaset/deleteUserFromService.do">
-                        <input type="text" name="service_id" value="${param.id}" readonly hidden>
-                        <td><input type="text" name="user_id" value="${user.id}" readonly/></td>
-                        <td><input type="text" name="username" value="${user.username}" readonly/></td>
-                        <td><input type="text" name="credit" value="${user.credit}" readonly/></td>
-                        <td><input type="text" name="role_id" value="${user.role_id}" readonly/></td>
-                        <td><input type="submit" value="حذف از سرویس" class="btn btn-dark" /></td>
-                    </form>
+                    <th>آی دی</th>
+                    <th>نام کاربری</th>
+                    <th>اعتبار</th>
+                    <th>ای دی نقش</th>
+                    <th>حذف کاربر از سرویس</th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach var="user" items="${requestScope.serviceUsersList}">
+                    <tr>
+                        <form action="/admin/serviceVaset/deleteUserFromService.do">
+                            <input type="text" name="service_id" value="${param.id}" readonly hidden>
+                            <td><input type="text" name="user_id" value="${user.id}" readonly/></td>
+                            <td><input type="text" name="username" value="${user.username}" readonly/></td>
+                            <td><input type="text" name="credit" value="${user.credit}" readonly/></td>
+                            <td><input type="text" name="role_id" value="${user.role_id}" readonly/></td>
+                            <td><input type="submit" value="حذف از سرویس" class="btn btn-dark"/></td>
+                        </form>
+                    </tr>
+                </c:forEach>
+            </table>
 
-    </fieldset>
+        </fieldset>
+    </div>
+
+    <br/><br/>
 </div>
 
 </body>

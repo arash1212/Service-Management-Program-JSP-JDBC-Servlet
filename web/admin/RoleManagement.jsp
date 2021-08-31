@@ -17,7 +17,7 @@
 
 
 <div class="container">
-    <fieldset style="margin-right: 5%;">
+    <fieldset>
         <legend>افزودن نقش جدید</legend>
         <br/>
 
@@ -37,38 +37,38 @@
     </fieldset>
 
 
+    <br/><br/><br/>
+
+    <fieldset>
+        <legend>لیست نقش ها</legend>
+        <table border="1" class="table thead-dark" style="margin: auto;width: 100%;">
+            <tr>
+                <th>شماره نقش</th>
+                <th>نام نقش</th>
+                <th>آدرس قابل دسترس</th>
+                <th>بروزرسانی نقش</th>
+                <th>حذف نقش</th>
+            </tr>
+
+            <!-- show all user roles in table -->
+            <c:forEach var="user_role" items="${requestScope.userRoles}">
+                <tr>
+                    <form action="/admin/user_role/update.do">
+                        <td><input type="text" name="id" value="${user_role.id}" readonly/></td>
+                        <td><input type="text" name="role_name" value="${user_role.role_name}"/></td>
+                        <td><input type="text" name="address" value="${user_role.address}"/></td>
+                        <td><input type="submit" value="بروزرسانی" class="btn btn-dark"/></td>
+                        <td><input type="button" onclick="del(${user_role.id})" value="حذف" class="btn btn-dark"/></td>
+                    </form>
+                </tr>
+            </c:forEach>
+        </table>
+
+    </fieldset>
+
 </div>
 
-<br/><br/><br/>
-
-<fieldset>
-    <legend>لیست نقش ها</legend>
-    <table border="1" class="table thead-dark" style="margin: auto;width: 100%;">
-        <tr>
-            <th>شماره نقش</th>
-            <th>نام نقش</th>
-            <th>آدرس قابل دسترس</th>
-            <th>بروزرسانی نقش</th>
-            <th>حذف نقش</th>
-        </tr>
-
-        <!-- show all user roles in table -->
-        <c:forEach var="user_role" items="${requestScope.userRoles}">
-            <tr>
-                <form action="/admin/user_role/update.do">
-                    <td><input type="text" name="id" value="${user_role.id}" readonly/></td>
-                    <td><input type="text" name="role_name" value="${user_role.role_name}"/></td>
-                    <td><input type="text" name="address" value="${user_role.address}"/></td>
-                    <td><input type="submit" value="بروزرسانی" class="btn btn-dark"/></td>
-                    <td><input type="button" onclick="del(${user_role.id})" value="حذف" class="btn btn-dark"/></td>
-                </form>
-            </tr>
-        </c:forEach>
-    </table>
-
-</fieldset>
-
-<br /><br />
+<br/><br/>
 
 </body>
 
