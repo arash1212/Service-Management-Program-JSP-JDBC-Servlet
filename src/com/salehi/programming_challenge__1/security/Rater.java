@@ -40,14 +40,20 @@ public class Rater implements Filter {
                     System.out.println("role_address :" + user_role.getId());
                     //
                     if (requestedURL.equals(user_role.getAddress())) {
+                        System.out.println("access granted");
                         filterChain.doFilter(request, response);
-                        break;
+                        return;
                     }
-                    System.out.println("role is not allowed in this url");
                     //
                 }
                 //
-            } else response.sendRedirect("/login.jsp");
+                System.out.println("role is not allowed in this url");
+                response.sendRedirect("/login.jsp");
+                //
+            } else {
+                System.out.println("please login first");
+                response.sendRedirect("/login.jsp");
+            } ;
             //
         } catch (Exception e) {
             e.printStackTrace();

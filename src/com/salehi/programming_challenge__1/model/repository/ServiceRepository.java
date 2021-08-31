@@ -113,6 +113,29 @@ public class ServiceRepository implements AutoCloseable {
         return usersList;
     }
 
+    public List<Service> findAllActiveServices() throws SQLException {
+        preparedStatement = connection.prepareStatement("select * from SERVICE where ACTIVE=1");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        //
+        List<Service> services = new ArrayList<>();
+        Service service;
+        while (resultSet.next()) {
+            service = new Service().setId(resultSet.getLong("id"))
+                    .setName(resultSet.getString("name"))
+                    .setPrice(resultSet.getLong("price"))
+                    .setPeak(resultSet.getInt("peak"))
+                    .setStartDate(resultSet.getString("startDate"))
+                    .setEndDate(resultSet.getString("endDate"))
+                    .setActive(resultSet.getShort("active"))
+                    .setEndTime(resultSet.getString("endTime"))
+                    .setStartTime(resultSet.getString("startTime"));
+
+            services.add(service);
+        }
+
+        return services;
+    }
+
 
     @Override
     public void close() throws SQLException {

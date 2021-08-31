@@ -29,7 +29,7 @@ public class UsersRepository implements AutoCloseable {
         preparedStatement = connection.prepareStatement("insert into users(id,USERNAME,password,credit,role_id) values (?,?,?,?,?)");
         preparedStatement.setLong(1, user.getId());
         preparedStatement.setString(2, user.getUsername());
-        preparedStatement.setString(3, user.getUsername());
+        preparedStatement.setString(3, user.getPassword());
         preparedStatement.setLong(4, user.getCredit());
         preparedStatement.setLong(5, user.getRole_id());
         preparedStatement.executeUpdate();

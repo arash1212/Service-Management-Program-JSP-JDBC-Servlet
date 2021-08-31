@@ -48,4 +48,10 @@ public class ServicesService {
         }
     }
 
+    public List<Service> getAllActiveServices() throws SQLException {
+        try (ServiceRepository serviceRepository = new ServiceRepository()) {
+            return serviceRepository.findAllActiveServices();
+        }
+    }
+
 }
