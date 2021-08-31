@@ -2,6 +2,7 @@ package com.salehi.programming_challenge__1.model.repository;
 
 import com.salehi.programming_challenge__1.model.common.JDBCConnection;
 import com.salehi.programming_challenge__1.model.entity.Service;
+import com.salehi.programming_challenge__1.model.entity.Service_vaset;
 import com.salehi.programming_challenge__1.model.entity.Users;
 
 import java.sql.Connection;
@@ -9,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceRepository implements AutoCloseable {
     private final Connection connection;
@@ -131,6 +134,37 @@ public class ServiceRepository implements AutoCloseable {
                     .setStartTime(resultSet.getString("startTime"));
 
             services.add(service);
+        }
+
+        return services;
+    }
+
+    public Map<Service, Service_vaset> findAllUserServices(Long userId) throws SQLException {
+        preparedStatement = connection.prepareStatement("select * from SERVICE service inner join SERVICE_VASET vaset on service.ID = vaset.SERVICE_ID and vaset.USER_ID=?");
+        preparedStatement.setLong(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        //
+        Map<Service, Service_vaset> services = new HashMap<>();
+        Service service;
+        Service_vaset serviceVaset;
+        while (resultSet.next()) {
+            service = new Service().setId(resultSet.getLong("id"))
+                    .setName(resultSet.getString("name"))
+                    .setPrice(resultSet.getLong("price"))
+                    .setPeak(resultSet.getInt("peak"))
+                    .setStartDate(resultSet.getString("startDate"))
+                    .setEndDate(resultSet.getString("endDate"))
+                    .setActive(resultSet.getShort("active"))
+                    .setEndTime(resultSet.getString("endTime"))
+                    .setStartTime(resultSet.getString("startTime"));
+            //
+            serviceVaset = new Service_vaset().setService_id(resultSet.getLong("service_id"))
+                    .setUser_id(resultSet.getLong("user_id"))
+                    .setUseTime(resultSet.getLong("useTime"));
+            //
+
+
+            services.put(service, serviceVaset);
         }
 
         return services;

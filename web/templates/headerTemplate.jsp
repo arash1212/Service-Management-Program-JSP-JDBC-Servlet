@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/bootstrap.min.css"/>
 
-<body class="text-right" style="background-color:  ">
+<body class="text-right">
 <header style="font-size: 90%;">
     <nav class="navbar navbar-expand-sm bg-dark navbar-light" style="color: white">
         <ul class="nav">
@@ -44,6 +44,11 @@
 
             <!-- show logged in user's role -->
             <c:if test="${sessionScope.roleName !=null}">
+
+                <li class="nav-item">
+                    <a style="color: white" class="nav-link" href="/user/service/findAllUserServices.do">مشاهده سرویس های فعال برای کاربر (کاربر)</a>
+                </li>
+
                 <li class="nav-item">
                     <a style="color: white" class="nav-link" href="/user/logout.do">خروج</a>
                 </li>

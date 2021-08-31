@@ -26,6 +26,7 @@ public class Login extends HttpServlet {
                 //
                 if (user_Role != null) {
                     request.getSession().setAttribute("roleName", user_Role.getRole_name());
+                    request.getSession().setAttribute("userId", users.getId());
                     response.sendRedirect("/");
                     System.out.println("user logged in");
                 } else {

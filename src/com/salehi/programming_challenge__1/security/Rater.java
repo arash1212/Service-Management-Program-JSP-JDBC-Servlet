@@ -27,7 +27,7 @@ public class Rater implements Filter {
             String requestedURL = request.getRequestURI().split("/")[1];
             String userRoleName = "";
             //
-            System.out.println(requestedURL);
+//            System.out.println(requestedURL);
             //
             if (request.getSession().getAttribute("roleName") != null) {
                 //
@@ -37,10 +37,9 @@ public class Rater implements Filter {
                 //
                 for (User_role user_role : userRoles) {
                     //
-                    System.out.println("role_address :" + user_role.getId());
+//                    System.out.println("role_address :" + user_role.getId());
                     //
                     if (requestedURL.equals(user_role.getAddress())) {
-                        System.out.println("access granted");
                         filterChain.doFilter(request, response);
                         return;
                     }

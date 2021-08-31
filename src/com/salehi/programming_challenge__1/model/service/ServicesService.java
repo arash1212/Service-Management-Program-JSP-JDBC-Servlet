@@ -1,11 +1,13 @@
 package com.salehi.programming_challenge__1.model.service;
 
 import com.salehi.programming_challenge__1.model.entity.Service;
+import com.salehi.programming_challenge__1.model.entity.Service_vaset;
 import com.salehi.programming_challenge__1.model.entity.Users;
 import com.salehi.programming_challenge__1.model.repository.ServiceRepository;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class ServicesService {
     private static final ServicesService instance = new ServicesService();
@@ -51,6 +53,12 @@ public class ServicesService {
     public List<Service> getAllActiveServices() throws SQLException {
         try (ServiceRepository serviceRepository = new ServiceRepository()) {
             return serviceRepository.findAllActiveServices();
+        }
+    }
+
+    public Map<Service, Service_vaset> getAllUserServices(Long userId) throws SQLException {
+        try (ServiceRepository serviceRepository = new ServiceRepository()) {
+            return serviceRepository.findAllUserServices(userId);
         }
     }
 

@@ -96,4 +96,14 @@ public class Service {
             return this;
         }else throw new IllegalArgumentException("variable active only accepts 0 or 1");
     }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id.equals(((Service)obj).getId());
+    }
 }

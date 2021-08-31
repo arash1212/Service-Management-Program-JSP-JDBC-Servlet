@@ -21,9 +21,10 @@ public class ServiceVasetRepository implements AutoCloseable {
     }
 
     public void save(Users users, Service service) throws SQLException {
-        preparedStatement = connection.prepareStatement("insert into SERVICE_VASET(user_id, service_id) values (?,?)");
+        preparedStatement = connection.prepareStatement("insert into SERVICE_VASET(user_id, service_id,USETIME) values (?,?,?)");
         preparedStatement.setLong(1, users.getId());
         preparedStatement.setLong(2, service.getId());
+        preparedStatement.setLong(3, 0);
         preparedStatement.executeUpdate();
     }
 

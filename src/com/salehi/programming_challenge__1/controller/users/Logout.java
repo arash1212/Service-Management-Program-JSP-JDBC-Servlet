@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/user/logout.do")
 public class Logout extends HttpServlet {
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             request.getSession().removeAttribute("roleName");
+            request.getSession().removeAttribute("userId");
+            //
             System.out.println("user logged out");
             response.sendRedirect("/");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error in user logout");
         }
