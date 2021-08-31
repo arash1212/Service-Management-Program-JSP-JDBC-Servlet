@@ -10,6 +10,8 @@ public class Service {
     private int peak;
     private String startDate;
     private String endDate;
+    private String startTime;
+    private String endTime;
     private short active;
 
     public Long getId() {
@@ -63,6 +65,24 @@ public class Service {
 
     public Service setEndDate(String endDate) {
         this.endDate = endDate;
+        return this;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public Service setStartTime(String startTime) {
+        this.startTime = startTime;
+        return this;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public Service setEndTime(String endTime) {
+        this.endTime = endTime;
         return this;
     }
 

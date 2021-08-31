@@ -8,24 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @WebServlet("/admin/service/save.do")
 public class Save extends HttpServlet {
+
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             //
             Service service = new Service().setName(request.getParameter("name"))
                     .setPrice(Long.parseLong(request.getParameter("price")))
                     .setPeak(Integer.parseInt(request.getParameter("peak")))
-                    .setStartDate(String.valueOf(request.getParameter("startTime")))
-                    .setEndDate(String.valueOf(request.getParameter("endTime")))
-                    .setActive(Short.parseShort(request.getParameter("active")));
+                    .setStartDate(String.valueOf(request.getParameter("startDate")))
+                    .setEndDate(String.valueOf(request.getParameter("endDate")))
+                    .setStartTime(String.valueOf(request.getParameter("startTime")))
+                    .setEndTime(String.valueOf(request.getParameter("endTime")))
+                    .setActive(request.getParameter("active") == null ? 0 : Short.parseShort(request.getParameter("active")));
             //
 
             if (!service.getStartDate().equals(service.getEndDate()) && dateFormat.parse(service.getStartDate()).before(dateFormat.parse(service.getEndDate()))) {
@@ -38,6 +39,11 @@ public class Save extends HttpServlet {
             response.sendRedirect("/admin/service/findAll.do");
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+                response.sendRedirect("/admin/ServiceManagment.jsp");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

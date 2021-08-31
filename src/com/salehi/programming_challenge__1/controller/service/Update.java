@@ -15,14 +15,16 @@ import java.text.SimpleDateFormat;
 public class Update extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             //
             Service service = new Service().setId(Long.parseLong(request.getParameter("id")))
                     .setName(request.getParameter("name"))
                     .setPrice(Long.parseLong(request.getParameter("price")))
                     .setPeak(Integer.parseInt(request.getParameter("peak")))
-                    .setStartDate(String.valueOf(request.getParameter("startTime")))
-                    .setEndDate(String.valueOf(request.getParameter("endTime")))
+                    .setStartDate(String.valueOf(request.getParameter("startDate")))
+                    .setEndDate(String.valueOf(request.getParameter("endDate")))
+                    .setStartTime(String.valueOf(request.getParameter("startTime")))
+                    .setEndTime(String.valueOf(request.getParameter("endTime")))
                     .setActive(request.getParameter("active") == null ? 0 : Short.parseShort(request.getParameter("active")));
             //
 

@@ -25,26 +25,30 @@ public class ServiceRepository implements AutoCloseable {
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         service.setId(resultSet.getLong("x"));
-        preparedStatement = connection.prepareStatement("insert into SERVICE(ID,NAME,PRICE,PEAK,STARTDATE,ENDDATE,ACTIVE) values (?,?,?,?,?,?,?)");
+        preparedStatement = connection.prepareStatement("insert into SERVICE(ID,NAME,PRICE,PEAK,STARTDATE,ENDDATE,STARTTIME,ENDTIME,ACTIVE) values (?,?,?,?,?,?,?,?,?)");
         preparedStatement.setLong(1, service.getId());
         preparedStatement.setString(2, service.getName());
         preparedStatement.setLong(3, service.getPrice());
         preparedStatement.setInt(4, service.getPeak());
         preparedStatement.setString(5, service.getStartDate());
         preparedStatement.setString(6, service.getEndDate());
-        preparedStatement.setShort(7, service.getActive());
+        preparedStatement.setString(7, service.getStartTime());
+        preparedStatement.setString(8, service.getEndTime());
+        preparedStatement.setShort(9, service.getActive());
         preparedStatement.executeUpdate();
     }
 
     public void update(Service service) throws SQLException {
-        preparedStatement = connection.prepareStatement("update SERVICE set NAME=?,PRICE=?,PEAK=?,STARTDATE=?,ENDDATE=?,ACTIVE=? where ID=?");
+        preparedStatement = connection.prepareStatement("update SERVICE set NAME=?,PRICE=?,PEAK=?,STARTDATE=?,ENDDATE=?,STARTTIME=?,ENDTIME=?,ACTIVE=? where ID=?");
         preparedStatement.setString(1, service.getName());
         preparedStatement.setLong(2, service.getPrice());
         preparedStatement.setInt(3, service.getPeak());
         preparedStatement.setString(4, service.getStartDate());
         preparedStatement.setString(5, service.getEndDate());
-        preparedStatement.setShort(6, service.getActive());
-        preparedStatement.setLong(7, service.getId());
+        preparedStatement.setString(6, service.getStartTime());
+        preparedStatement.setString(7, service.getEndTime());
+        preparedStatement.setShort(8, service.getActive());
+        preparedStatement.setLong(9, service.getId());
         preparedStatement.executeUpdate();
     }
 
@@ -60,7 +64,9 @@ public class ServiceRepository implements AutoCloseable {
                     .setName(resultSet.getString("name"))
                     .setActive(resultSet.getShort("active"))
                     .setStartDate(resultSet.getString("startDate"))
-                    .setEndDate(resultSet.getString("endDate"));
+                    .setEndDate(resultSet.getString("endDate"))
+                    .setEndTime(resultSet.getString("endTime"))
+                    .setStartTime(resultSet.getString("startTime"));
         } else return null;
     }
 
@@ -78,7 +84,9 @@ public class ServiceRepository implements AutoCloseable {
                     .setPeak(resultSet.getInt("peak"))
                     .setStartDate(resultSet.getString("startDate"))
                     .setEndDate(resultSet.getString("endDate"))
-                    .setActive(resultSet.getShort("active"));
+                    .setActive(resultSet.getShort("active"))
+                    .setEndTime(resultSet.getString("endTime"))
+                    .setStartTime(resultSet.getString("startTime"));
 
             services.add(service);
         }
